@@ -47,30 +47,26 @@ const Featured = () => {
         <div className="shop-carousel swiper" ref={swiperRef}>
           <div className="swiper-wrapper">
             {data.products.edges.map(({ node: product }) => (
-              <div className="swiper-slide" key={product.id}>
+              <div className="swiper-slide" key={product.databaseId}>
                 <div className="shop-item">
                   <div className="shop-thumb">
                     <div className="overlay"></div>
-                    <Link to={`/product/${product.id}`}>
+                    <Link to={`/product/${product.databaseId}`}>
                       <img src={product.featuredImage?.node.sourceUrl} alt={product.name} />
                     </Link>
                     <span className="sale">New</span>
                     <ul className="shop-list">
                       <li>
-                        <a href="cart.html">
+                        <Link to="/cart">
                           <i className="fa-regular fa-cart-shopping"></i>
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a href="#">
+                        <Link to="/wishlist">
                           <i className="fa-light fa-heart"></i>
-                        </a>
+                       </Link>
                       </li>
-                      <li>
-                        <a href="#">
-                          <i className="fa-light fa-eye"></i>
-                        </a>
-                      </li>
+                    
                     </ul>
                   </div>
                   <div className="shop-content">
@@ -94,7 +90,7 @@ const Featured = () => {
                         ) : (
                             `${product.price.startsWith('$') ? product.price : `$${product.price}`}`
                         )}
-                        </span>
+                    </span>
                   </div>
                 </div>
               </div>

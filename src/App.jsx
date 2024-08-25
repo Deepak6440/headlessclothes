@@ -24,7 +24,7 @@ function App() {
       <ApolloProvider client={client}>
       <Routes>
         <Route path="/" element={ <Home />} />
-        <Route path="/product" element={ <SingleProduct/> } />
+        <Route path="/product/:id" element={ <SingleProduct/> } />
         <Route path="/login" element={<Login />}/>
         <Route path="/register" element={<Register/>} />
         <Route path="/shop" element={<Shop />} />

@@ -1,6 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { useQuery } from '@apollo/client';
+import { GET_PRODUCT_DETAILS } from '../../Queries/SingleProductQueries';
+import LoadingIndicator from '../../LoadingIndicator/LoadingIndicator';
+import BannerImgPorDesc from "../../../assets/img/Home/asset 35.jpeg"
+export const ProductDescription = ({productId}) => {
+    const { loading, error, data } = useQuery(GET_PRODUCT_DETAILS, {
+        variables: { id: productId },
+      });
 
-const ProductDescription = () => {
+      const removePTags = (html) => {
+        return html.replace(/<p>/g, '').replace(/<\/p>/g, '');
+      };
+      if (loading) return <LoadingIndicator />;
+  if (error) return <p>Error: {error.message}</p>;
+  const product = data.product;
+      const cleanedDescription = removePTags(product.description);
   return (
    <>
      <section className="product-description pb-100">
@@ -23,11 +37,11 @@ const ProductDescription = () => {
                     <div className="tab-pane fade show active description" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <div className="desc-wrap">
                             <div className="left-content">
-                                <p className="mb-30">Credibly negotiate emerging materials whereas clicks-and-mortar intellectual capital. Compellingly whiteboard client-centric sourcescross-platform schemas. Distinctively develop future-proof outsourcing without multimedia based portals. Progressively coordinate generation architectures for collaborative solutions. Professionally restore backward-compatible quality vectors before customer directed metrics. Holisticly restore technically sound internal or "organic" sources before client-centered human capital underwhelm holistic mindshare for prospective innovation.</p>
-                                <p className="mb-0">Seamlessly target fully tested infrastructures whereas just in time process improvements. Dynamically exploit team driven functionalities vis a vis global total linkage redibly synthesize just in time technology rather than open-source strategic theme areas.</p>
+                                <p className="mb-30">{cleanedDescription}</p>
+                               
                             </div>
                             <div className="right-content">
-                                <img src="assets/img/shop/shop-details-img.jpg" alt=""/>
+                                <img src={BannerImgPorDesc} alt=""/>
                             </div>
                         </div>
                     </div>
@@ -75,9 +89,7 @@ const ProductDescription = () => {
                                 <div className="reviewr-wrap">
                                     <div className="review-list">
                                         <div className="review-item">
-                                            <div className="review-thumb">
-                                                <img src="assets/img/shop/review-list-1.jpg" alt="img"/>
-                                            </div>
+                                           
                                             <div className="content">
                                                 <div className="content-top">
                                                     <h4 className="name">Eleanor Fant <span>06 March, 2023</span></h4>
@@ -93,9 +105,7 @@ const ProductDescription = () => {
                                             </div>
                                         </div>
                                         <div className="review-item">
-                                            <div className="review-thumb">
-                                                <img src="assets/img/shop/review-list-2.jpg" alt="img"/>
-                                            </div>
+                                           
                                             <div className="content">
                                                 <div className="content-top">
                                                     <h4 className="name">Haliey White <span>06 March, 2023</span></h4>
@@ -151,7 +161,7 @@ const ProductDescription = () => {
                                                 </div>
                                                 <div className="checkbox-wrap">
                                                     <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat"/>
-                                                <label for="vehicle3">Save my name, email, and website in this browser for the next time I comment.</label><br/>
+                                                <label htmlFor="vehicle3">Save my name, email, and website in this browser for the next time I comment.</label><br/>
                                                 </div>
                                                 <div className="submit-btn">
                                                     <button id="submit" className="rr-primary-btn" type="submit">Submit</button>
