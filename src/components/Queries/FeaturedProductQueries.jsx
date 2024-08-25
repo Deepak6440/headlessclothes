@@ -6,7 +6,7 @@ export const GET_FEATURED_PRODUCTS = gql`
   products(where: { featured: true }, first: 8) {
     edges {
       node {
-        id
+        databaseId
         sku
         name
         reviewCount

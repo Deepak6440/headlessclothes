@@ -1,5 +1,5 @@
 import React from 'react'
-import CTA from "../../assets/img/Home/asset 43.jpeg"
+import CTA from "../../assets/img/Home/asset43.jpeg"
 export const CallToAction = () => {
   return (
     <>
