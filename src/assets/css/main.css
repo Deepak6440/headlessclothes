@@ -6226,6 +6226,7 @@ START: Blog CSS
   font-weight: 600;
   line-height: 1;
   display: inline-block;
+  text-transform: capitalize;
 }
 @media only screen and (max-width: 992px) {
   .page-header-content .title {
@@ -6256,6 +6257,7 @@ START: Blog CSS
   font-size: 18px;
   color: var(--rr-color-heading-primary);
   font-weight: 600;
+  text-transform: capitalize;
 }
 
 /* !END: Page Header CSS */
@@ -9701,3 +9703,97 @@ START: Footer CSS
 /* !END: Theme Footer CSS */
 
 /*# sourceMappingURL=main.css.map */
+/*Error meesaage css*/
+p.error-text {
+  color: red;
+  font-weight: 500;
+}
+
+.is-invalid {
+  border-color: red; 
+  outline: 2px solid red;
+}
+
+/*Order details page*/
+.order-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  padding-top: 25px;
+}
+span.oNumber {
+  color: red;
+}
+
+.order-summary h6 {
+  margin-bottom: 10px;
+}
+
+.cart-table, .order-totals {
+  margin-bottom: 30px;
+}
+
+
+
+.total {
+  font-weight: bold;
+}
+
+.addresses {
+  display: flex;
+  justify-content: space-between;
+}
+
+.address {
+  width: 48%;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.address h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.address p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.cart-table tbody tr td.product-thumbnail {
+  border-bottom: none;
+  
+}
+.cart-table tbody tr {
+  vertical-align: auto;
+}
+
+/*DashBoard */
+
+.dashboard {
+  width: 75%;
+  margin-top: 60px;
+  margin-inline: auto;
+}
+
+nav.col-md-3.col-lg-2.d-md-block.bg-light.sidebar {
+  margin-bottom: 60px;
+}
+button.add-to-cart-btn {
+    background-color: var(--rr-color-common-white);
+    height: 45px;
+    width: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+button.add-to-cart-btn:hover{
+  background-color: var(--rr-color-theme-primary);
+    color: var(--rr-color-common-white);
+}

@@ -1,6 +1,6 @@
 import React from 'react'
-import WishlistHeader from "./WishlistHeader"
-import WishlistTable from "./WishlistTable";
+import WishlistHeader from "./WishlistHeader/WishlistHeader"
+import WishlistTable from "./WishlistTable/WishlistTable"
 const Wishlist = () => {
   return (
    <>

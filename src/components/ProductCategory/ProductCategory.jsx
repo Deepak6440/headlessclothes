@@ -1,11 +1,13 @@
 import React from 'react'
 import ProductCatList from './ProductCatList/ProductCatList'
 import ProductHeader from './ProductHeader/ProductHeader'
-const ProductCategory = () => {
+import { useParams } from 'react-router-dom';
+const ProductCategory = ({ categoryName }) => {
+  const { catName } = useParams();
   return (
    <>
-    <ProductHeader />
-    <ProductCatList/>
+    <ProductHeader categoryName={catName} />
+    <ProductCatList categoryNames={[catName]}/>
    </>
   )
 }

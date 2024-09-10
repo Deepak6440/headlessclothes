@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { useQuery, useMutation } from '@apollo/client';
-import { GET_PRODUCT_DETAILS, ADD_TO_CART_MUTATION } from '../../Queries/SingleProductQueries';
+import { useQuery } from '@apollo/client';
+import { useDispatch } from 'react-redux';
+import { GET_PRODUCT_DETAILS } from '../../Queries/SingleProductQueries';
 import LoadingIndicator from '../../LoadingIndicator/LoadingIndicator';
 import parse from 'html-react-parser';
-
+import { addToCart } from '../../../slice/cartSlice';
+import { toast } from 'react-toastify';
 export const ProductSection = ({ productId }) => {
   const { loading, error, data } = useQuery(GET_PRODUCT_DETAILS, {
     variables: { id: productId },
@@ -12,33 +14,21 @@ export const ProductSection = ({ productId }) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const [addToCart, { loading: addToCartLoading, error: addToCartError }] = useMutation(ADD_TO_CART_MUTATION, {
-    onCompleted: (data) => {
-      console.log('Added to cart:', data);
-    },
-    onError: (error) => {
-      console.error('Error adding to cart:', error);
-    },
-  });
+  const dispatch = useDispatch();
 
   const handleQuantityChange = (e) => {
     const newQuantity = Number(e.target.value);
     setQuantity(newQuantity < 1 ? 1 : newQuantity);
   };
 
-  const handleAddToCart = async () => {
-    try {
-      await addToCart({
-        variables: {
-          productId: parseInt(productId, 10), 
-          quantity: quantity,
-        },
-      });
-    } catch (e) {
-      console.error('Error adding to cart:', e);
-    }
+  const handleAddToCart = () => {
+    const { name, price, featuredImage } = product;
+    dispatch(addToCart({ id: productId, quantity, name, price, image: featuredImage?.node?.sourceUrl }));
+    //console.log(`Added product with ID: ${productId} and quantity: ${quantity} to the cart.`);
+    toast.success('Product added to cart!');
   };
-
+  
+ 
   const removePTags = (html) => {
     return html.replace(/<p>/g, '').replace(/<\/p>/g, '');
   };
@@ -124,12 +114,10 @@ export const ProductSection = ({ productId }) => {
                     <button
                       className="rr-primary-btn cart-btn"
                       onClick={handleAddToCart}
-                      disabled={addToCartLoading}
                     >
-                      {addToCartLoading ? 'Adding...' : 'Add To Cart'}
+                      Add To Cart
                     </button>
                   </div>
-                  {addToCartError && <p style={{ color: 'red' }}>Error: {addToCartError.message}</p>}
                 </div>
                 <a href="#" className="shop-details-btn rr-primary-btn">Buy The Item Now</a>
                 <ul className="product-meta">

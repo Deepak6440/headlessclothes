@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 import Swiper from 'swiper';
 import { GET_FEATURED_PRODUCTS } from '../Queries/FeaturedProductQueries'; 
 import LoadingIndicator from '../LoadingIndicator/LoadingIndicator';
-
+import { useDispatch } from 'react-redux';
+import { addToCart, addToWishlist } from '../../slice/cartSlice';
+import { toast } from 'react-toastify';
 const Featured = () => {
   const { loading, error, data } = useQuery(GET_FEATURED_PRODUCTS);
   const swiperRef = useRef(null);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     if (swiperRef.current) {
       new Swiper(swiperRef.current, {
@@ -23,6 +25,16 @@ const Featured = () => {
       });
     }
   }, [data]); 
+
+  const handleAddToCart = (product) =>{
+    dispatch(addToCart(product))
+    toast.success('Product added to cart!');
+  }
+
+  const handleAddToWishlist = (product) => {
+    dispatch(addToWishlist(product))
+    toast.success('Product added to Wishlist!');
+  }
 
   if (loading) return <LoadingIndicator />
   if (error) return <p>Error: {error.message}</p>;
@@ -56,15 +68,36 @@ const Featured = () => {
                     </Link>
                     <span className="sale">New</span>
                     <ul className="shop-list">
+                    <li>
+                      <button 
+                        onClick={() => handleAddToCart({
+                          id: product.databaseId,
+                          name: product.name,
+                          price: product.salePrice || product.price,  // Ensure a valid price is passed
+                          image: product.featuredImage?.node.sourceUrl,
+                          quantity:1
+                        })}
+                        className="add-to-cart-btn"
+                      >
+                        <i className="fa-regular fa-cart-shopping"></i>
+                      </button>
+                    </li>
+
                       <li>
-                        <Link to="/cart">
-                          <i className="fa-regular fa-cart-shopping"></i>
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/wishlist">
-                          <i className="fa-light fa-heart"></i>
-                       </Link>
+                       
+                        <button 
+                        onClick={() => handleAddToWishlist({
+                          id: product.databaseId,
+                          name: product.name,
+                          price: product.salePrice || product.price,  // Ensure a valid price is passed
+                          image: product.featuredImage?.node.sourceUrl,
+                          quantity:1
+                        })}
+                        className="add-to-cart-btn"
+                      >
+                         <i className="fa-light fa-heart"></i>
+                      </button>
+                      
                       </li>
                     
                     </ul>
