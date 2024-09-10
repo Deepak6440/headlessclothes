@@ -1,7 +1,18 @@
 import React from 'react'
 import Logo from "../../../assets/img/logo-1.png"
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 const MiddleHeader = () => {
+    
+    const cartItems = useSelector((state) => state.cart.cartItems);
+    // Calculate the total quantity and total price
+    const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+    const totalPrice = cartItems.reduce((total, item) => total + item.quantity * parseFloat(item.price.replace('$', '')), 0).toFixed(2);
+
+    const wishlistItems = useSelector((state) => state.cart.wishlistItems); // Access the wishlist items
+    const wishlistCount = wishlistItems.reduce((total, item) => total + item.quantity, 0);
+
+
   return (
     <>
     
@@ -42,16 +53,17 @@ const MiddleHeader = () => {
                                 <li>
                                     <Link to="/wishlist" className="icon">
                                         <i className="fa-sharp fa-regular fa-heart"></i>
+                                        <span>{wishlistCount}</span>
                                    </Link>
                                 </li>
                                 <li>
                                     <Link to="/cart" className="icon">
                                         <i className="fa-light fa-bag-shopping"></i>
-                                        <span>2</span>
+                                        <span>{cartCount}</span>
                                     </Link>
                                     <div className="content">
                                         <span>Your cart,</span>
-                                        <h5 className="number">$1280.00</h5>
+                                        <h5 className="number">{totalPrice}</h5>
                                     </div>
                                 </li>
                             </ul>

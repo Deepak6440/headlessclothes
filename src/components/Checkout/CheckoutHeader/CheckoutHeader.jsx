@@ -1,10 +1,10 @@
 import React from 'react'
-
+import HeaderImg from "../../../assets/img/page-header-shape.png"
 const CheckoutHeader = () => {
   return (
     <>
          <section className="page-header">
-            <div className="shape"><img src="assets/img/shapes/page-header-shape.png" alt="shape"/></div>
+            <div className="shape"><img src={HeaderImg} alt="shape"/></div>
             <div className="container">
                 <div className="page-header-content">
                     <h1 className="title">Checkout</h1>

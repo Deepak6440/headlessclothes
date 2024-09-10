@@ -33,10 +33,10 @@ const PrimaryHeader = () => {
                                         </ul> */}
                                     </li>
                                     <li>
-                                        <Link to="/women"> Women</Link>
+                                        <Link to="/category/women"> Women</Link>
                                     </li>
                                     <li>
-                                    <Link to="/men"> Men</Link>
+                                    <Link to="/category/men"> Men</Link>
                                     </li>
                                    
                                     <li className="menu-item-has-children">

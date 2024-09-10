@@ -45,25 +45,3 @@ export const GET_PRODUCT_DETAILS = gql`
     }
   }
 `;
-
-export const ADD_TO_CART_MUTATION = gql`
-  mutation AddToCart($productId: Int!, $quantity: Int!) {
-    addToCart(input: { productId: $productId, quantity: $quantity }) {
-      cart {
-        contents {
-          nodes {
-            key
-            product {
-              node {
-                id
-                name
-              }
-            }
-            quantity
-            total
-          }
-        }
-      }
-    }
-  }
-`;
